@@ -4,7 +4,7 @@ class Employee
 
     def initialize(full_name, id)
         @full_name = full_name
-	@id = id
+	    @id = id
     end
 
     def last_name
@@ -50,7 +50,6 @@ def add_employee(employees)
     print 'Is the person an [e]mployee, [p]rogrammer or an [o]ffice manager? '
     action = get_action
     case action
-    when 'e' then employee = Employee.new(full_name, id)
     when 'p' then
         print 'Programming languages: '
         languages = gets.chomp	
@@ -60,7 +59,6 @@ def add_employee(employees)
         office = gets.chomp
 	employee = OfficeManager.new(full_name, id, office)
     else
-        puts 'That wasn\'t an instruction!'
 	employee = Employee.new(full_name, id)
     end
 
@@ -71,36 +69,37 @@ def edit_employee(employees)
     puts '[Edit an employee]'
     print 'ID of the employee you want to edit: '
     id = gets.chomp
-    employees.each do |employee|
-        if (employee.id == id) then
-            puts "Current full name: #{employee.full_name}"
-	    puts "Current ID: #{employee.id}"
-	    action = ''
-	    case employee
-	    when Programmer then 
-                puts "Current languages: #{employee.languages}"
-	        print 'Do you want to edit [i]d or [p]rogramming languages? '
-                action = get_action
-            when OfficeManager then 
-	        puts "Current office: #{employee.office}"
-		print 'Do you want to edit [i]d or [o]ffice? '
-		action = get_action
-	    else
-                action = 'i'
-	    end
-	    case action
-            when 'p' then
-                print 'New programming languages: '
-		employee.languages = gets.chomp.split(', ')
-	    when 'o' then
-	        print 'New office: '
-		employee.office = "(#{gets.chomp})"
-	    else
-                print 'New ID: '
-		employee.id = gets.chomp
-	    end
-	    break
-	end
+    employee = employees.find {|employee| employee.id == id}
+    puts "Current full name: #{employee.full_name}"
+    puts "Current ID: #{employee.id}"
+    action = ''
+    case employee
+    when Programmer then 
+        puts "Current languages: #{employee.languages}"
+        print 'Do you want to edit [n]ame, [i]d or [p]rogramming languages? '
+        action = get_action
+    when OfficeManager then 
+        puts "Current office: #{employee.office}"
+        print 'Do you want to edit [n]ame, [i]d or [o]ffice? '
+        action = get_action
+    else
+        print 'Do you want to edit [n]ame or [i]d? '
+        action = get_action
+    end
+
+    case action
+    when 'p' then
+        print 'New programming languages: '
+        employee.languages = gets.chomp.split(', ')
+    when 'o' then
+        print 'New office: '
+        employee.office = "(#{gets.chomp})"
+    when 'n' then
+        print 'New full name: '
+        employee.full_name = gets.chomp
+    else
+        print 'New ID: '
+        employee.id = gets.chomp
     end
 end
 

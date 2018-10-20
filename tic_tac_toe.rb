@@ -15,8 +15,7 @@ end
 def move(board, player)
     puts "Player '#{player}' move."
     print 'Where do you want to play your move [0 - 8]? '
-    field = gets.chomp
-    field = field.to_i
+    field = gets.chomp.to_i
 	
     if field.between?(0, 8) then
         if (board[field] == "[ O ]") or (board[field] == "[ X ]") then
