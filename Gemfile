@@ -42,6 +42,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
 ## Frontend gem 
 gem 'bootstrap'
+## Magic
+gem 'simple_form'
+## Validation errors
+gem 'toastr_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
